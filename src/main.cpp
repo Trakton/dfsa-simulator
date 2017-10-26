@@ -46,7 +46,7 @@ int main(){
   EomLee eomLee;
 
   estimators.push_back(&lowerBound);
-  estimators.push_back(&lowerBound);
+  estimators.push_back(&eomLee);
 
   vector<Simulator> simulators;
 
