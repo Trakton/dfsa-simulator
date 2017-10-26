@@ -10,10 +10,12 @@ class Simulator{
     Estimator* estimator;
     int inUse[1000000];
     int removed[1000000];
-    int it;
+    int it = 0;
+    int size = 0;
     vector<vector<int> > results;
     vector<int> labels;
   public:
+    Simulator(){}
     Simulator(int tagMin, int tagMax, int tagStep, int repetitions, int slots, Estimator* estimator){
       this->tagMin = tagMin;
       this->tagMax = tagMax;
@@ -25,9 +27,8 @@ class Simulator{
       this->results.assign(tagMax, vector<int>());
     }
     void run(){
-      int k = 0;
       for(int tags = tagMin; tags <= tagMax; tags += tagStep){
-        labels[k] = tags;
+        labels[size] = tags;
         double collisionsMean = 0;
         double emptiesMean = 0;
         double slotsMean = 0;
@@ -68,12 +69,19 @@ class Simulator{
           int elapsed = (((end.tv_sec - start.tv_sec)*1000000L+end.tv_usec) - start.tv_usec);
           timeMean += elapsed;
         }
-        results[k].push_back(ceil(slotsMean/(double)repetitions));
-        results[k].push_back(ceil(emptiesMean/(double)repetitions));
-        results[k].push_back(ceil(collisionsMean/(double)repetitions));
-        results[k++].push_back(ceil(timeMean/(double)repetitions));
-
-        printf("%d tags: %d %d %d %d\n", labels[k-1], results[k-1][0], results[k-1][1], results[k-1][2], results[k-1][3]);
+        results[size].push_back(ceil(slotsMean/(double)repetitions));
+        results[size].push_back(ceil(emptiesMean/(double)repetitions));
+        results[size].push_back(ceil(collisionsMean/(double)repetitions));
+        results[size++].push_back(ceil(timeMean/(double)repetitions));
       }
+    }
+    int getSize(){
+      return size;
+    }
+    vector<vector<int> > getResult(){
+      return results;
+    }
+    vector<int> getLabel(){
+      return labels;
     }
 };
