@@ -5,6 +5,7 @@
 #include<time.h>
 #include<cstdlib>
 #include "estimator.cpp"
+#include "eomlee.cpp"
 #include "lowerBound.cpp"
 #include "simulator.cpp"
 
@@ -21,8 +22,9 @@ int main(){
   printf("\nMaximum number of tags: %d", tagMax);
   printf("\nStarting number of slot: %d", slots);
   printf("\nNumber of repetitions: %d\n", repetitions);
-  LowerBound estimator;
-  Estimator* estimatorPtr = &estimator;
+  LowerBound lowerBound;
+  EomLee eomLee;
+  Estimator* estimatorPtr = &eomLee;
   Simulator simulator(tagMin, tagMax, tagStep, repetitions, slots, estimatorPtr);
   simulator.run();
   return 0;

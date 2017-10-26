@@ -40,6 +40,7 @@ class Simulator{
           while(toIdentify){
             it++;
             int collisions = 0;
+            int sucess = 0;
             int empties = slots;
             int remaining = toIdentify;
             for(int j = 0; j < remaining; j++){
@@ -49,17 +50,19 @@ class Simulator{
                   collisions++;
                   removed[x] = it;
                   toIdentify++;
+                  sucess--;
                 }
               } else {
                 inUse[x] = it;
                 empties--;
+                sucess++;
                 toIdentify--;
               }
             }
             collisionsMean += collisions;
             emptiesMean += empties;
             slotsMean += slots;
-            slots = estimator->getNextFrame(collisions, empties);
+            slots = estimator->getNextFrame(collisions, empties, sucess);
           }
           gettimeofday(&end, 0);
           int elapsed = (((end.tv_sec - start.tv_sec)*1000000L+end.tv_usec) - start.tv_usec);
