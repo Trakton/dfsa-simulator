@@ -17,6 +17,7 @@ EOF
 
 gnuplot <<- EOF
   set grid layerdefault linewidth 1
+  set yrange [0:1100]
   set xlabel "Tags"
   set ylabel "Empty Slots"
   set title "Total Number of Empty Slots left for each Estimator"
@@ -36,7 +37,7 @@ gnuplot <<- EOF
 EOF
 
 gnuplot <<- EOF
-  set grid layerdefault linewidth 1 
+  set grid layerdefault linewidth 1
   set xlabel "Tags"
   set ylabel "Runtime in Microseconds"
   set title "Total Simulation Runtime in Microseconds"
