@@ -20,6 +20,7 @@ EOF
 gnuplot <<- EOF
   set grid layerdefault linewidth 1
   set yrange [0:1100]
+  set ytics 100
   set xlabel "Tags"
   set ylabel "Empty Slots"
   set title "Total Number of Empty Slots left for each Estimator"
