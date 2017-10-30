@@ -13,7 +13,7 @@ class EomLee : public Estimator{
           double eb = (1+(1/b))*e;
           double nb = b*(1-eb);
           y = a/nb;
-          if(abs(y-py) < eps){
+          if(fabs(y-py) < eps){
             break;
           }
           py = y;
