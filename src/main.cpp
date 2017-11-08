@@ -1,15 +1,16 @@
-#include<vector>
-#include<stdio.h>
-#include<cmath>
-#include<sys/time.h>
-#include<time.h>
-#include<cstdlib>
+#include <vector>
+#include <stdio.h>
+#include <cmath>
+#include <sys/time.h>
+#include <time.h>
+#include <cstdlib>
 #include <iostream>
 #include <fstream>
-#include<string>
+#include <string>
 #include "estimator.cpp"
 #include "eomlee.cpp"
 #include "lowerBound.cpp"
+#include "dsMap.cpp"
 #include "simulator.cpp"
 
 using namespace std;
@@ -39,18 +40,18 @@ int main(){
   printf("\nStarting number of slot: %d", slots);
   printf("\nNumber of repetitions: %d\n", repetitions);
 
-  int nEstimators = 2;
-
   vector<Estimator*> estimators;
   LowerBound lowerBound;
   EomLee eomLee;
+  DsMap dsMap;
 
   estimators.push_back(&lowerBound);
   estimators.push_back(&eomLee);
+  estimators.push_back(&dsMap);
 
   vector<Simulator> simulators;
 
-  for(int i = 0; i < nEstimators; i++){
+  for(int i = 0; i < estimators.size(); i++){
     simulators.push_back(Simulator(tagMin, tagMax, tagStep, repetitions, slots, estimators[i]));
     simulators[i].run();
   }

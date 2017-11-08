@@ -1,3 +1,9 @@
+#include <vector>
+#include <cmath>
+#include <sys/time.h>
+#include <time.h>
+#include "estimator.cpp"
+
 using namespace std;
 
 class Simulator{

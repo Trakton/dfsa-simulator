@@ -1,4 +1,7 @@
-class EomLee : public Estimator{
+#include <cmath>
+#include "estimator.cpp"
+
+class EomLee : public Estimator {
   public:
     int getNextFrame(int collisions, int empties, int sucess){
         double eps = 0.001;
