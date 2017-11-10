@@ -12,7 +12,7 @@ gnuplot <<- EOF
   set style line 2 pt 2
   set term png
   set output "graphs/slots.png"
-  plot "output/slots.csv" u 1:2 pt 1 title "LowerBound" w linespoints, "output/slots.csv" u 1:3 title "Eom Lee" w linespoints, "output/slots.csv" u 1:4 title "Chen" w linespoints
+  plot "output/slots.csv" u 1:2 pt 1 title "LowerBound" w linespoints, "output/slots.csv" u 1:3 title "Eom Lee" w linespoints, "output/slots.csv" u 1:4 title "DS-MAP" w linespoints
 EOF
 
 gnuplot <<- EOF
@@ -22,7 +22,7 @@ gnuplot <<- EOF
   set title "Total Number of Empty Slots left for each Estimator"
   set term png
   set output "graphs/empties.png"
-  plot "output/empties.csv" u 1:2 title "LowerBound" w linespoints, "output/empties.csv" u 1:3 title "Eom Lee" w linespoints, "output/empties.csv" u 1:4 title "Chen" w linespoints
+  plot "output/empties.csv" u 1:2 title "LowerBound" w linespoints, "output/empties.csv" u 1:3 title "Eom Lee" w linespoints, "output/empties.csv" u 1:4 title "DS-MAP" w linespoints
 EOF
 
 gnuplot <<- EOF
@@ -32,7 +32,7 @@ gnuplot <<- EOF
   set title "Total Number of Collisions ocurred for each Estimator"
   set term png
   set output "graphs/collisions.png"
-  plot "output/collisions.csv" u 1:2 title "LowerBound" w linespoints, "output/collisions.csv" u 1:3 title "Eom Lee" w linespoints, "output/collisions.csv" u 1:4 title "Chen" w linespoints
+  plot "output/collisions.csv" u 1:2 title "LowerBound" w linespoints, "output/collisions.csv" u 1:3 title "Eom Lee" w linespoints, "output/collisions.csv" u 1:4 title "DS-MAP" w linespoints
 EOF
 
 gnuplot <<- EOF
@@ -42,7 +42,7 @@ gnuplot <<- EOF
   set title "Total Simulation Runtime in Microseconds"
   set term png
   set output "graphs/time.png"
-  plot "output/time.csv" u 1:2 title "LowerBound" w linespoints, "output/time.csv" u 1:3 title "Eom Lee" w linespoints, "output/time.csv" u 1:4 title "Chen" w linespoints
+  plot "output/time.csv" u 1:2 title "LowerBound" w linespoints, "output/time.csv" u 1:3 title "Eom Lee" w linespoints, "output/time.csv" u 1:4 title "DS-MAP" w linespoints
 EOF
 
 gnuplot <<- EOF
@@ -52,6 +52,6 @@ gnuplot <<- EOF
   set title "Total Throughtput"
   set term png
   set output "graphs/flow.png"
-  plot "output/flow.csv" u 1:2 title "LowerBound" w linespoints, "output/flow.csv" u 1:3 title "Eom Lee" w linespoints, "output/flow.csv" u 1:4 title "Chen" w linespoints
+  plot "output/flow.csv" u 1:2 title "LowerBound" w linespoints, "output/flow.csv" u 1:3 title "Eom Lee" w linespoints, "output/flow.csv" u 1:4 title "DS-MAP" w linespoints
 EOF
 
