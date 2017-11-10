@@ -1,43 +1,37 @@
+
+using namespace std;
 class DsMap : public Estimator {
   private:
-    int getSubFrameSize(int frames) {
-        // if (frames < 8)
-        //     return 2;
-        if (frames < 16)
-            return 4;
-        // if (frames < 32)
-        //     return 6;
-        if (frames < 64)
-            return 8;
-        // if (frames < 128)
-        //     return 12;
-        if (frames < 256)
-            return 16;
-        // if (frames < 512)
-        //     return 24;
-        if (frames < 1024)
-            return 32;
-        return 64;
-    }
-    int map() {
-        return 0;
-    }
-    bool fitsNEst(int fCur, int nEst) {
-        return true;
+    double fatSimples(int a, vector<int> divs, double m){
+        double ret = m;
+        while(a > 1) {
+            ret *= a;
+            a--;
+            for(int i = 0; i < divs.size(); i++){
+                if(divs[i] > 1){
+                    ret = ret / (double)divs[i];
+                    divs[i]--;                    
+                }
+            }
+        }
+        return ret;
     }
   public:
     int getNextFrame(int collisions, int empties, int sucess) {
-        int fIni = collisions + empties + sucess;
-        int fCur = fIni;
-        int fSub = getSubFrameSize(fSub);
-        int n = map();
-        int k = fIni/fSub;
-        int nEst = n*k;
-        if (fitsNEst(fCur, nEst)) {
-            
-            return 1;
-        } else {
-            return 1;
+        int L = collisions + empties + sucess;
+		int n =  sucess + 2*collisions;
+		double next = 0.0;
+        double previous = -1.0;
+		while(previous < next){
+			double x = 1 - (1/(double)L);
+			double pe = pow(x, (double)n);
+			double ps = (n/(double)L) * pow(x,((double)n-1));
+			double pc = 1 - pe - ps;
+			previous = next;
+			double a = pow(pe, empties)*pow(ps, sucess)*pow(pc, collisions);
+			next = fatSimples(L, vector<int>{empties, sucess, collisions}, a);
+            n++;    
         }
+		return n - 2;
     }
 };

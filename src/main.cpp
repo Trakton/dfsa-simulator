@@ -28,6 +28,19 @@ void export_csv(string path, vector<Simulator> &simulators, int id){
   file.close();
 }
 
+void export_flow(string path, vector<Simulator> simulators){
+  ofstream file;
+  file.open(path);
+  for(int k = 0; k < simulators[0].getSize(); k++){
+    file << simulators[0].getLabel()[k];
+    for(int j = 0; j < simulators.size(); j++){
+      file << ", " << simulators[j].getFlow()[k];
+    }
+    file << "\n";
+  }
+  file.close();
+}
+
 int main(){
   srand(time(NULL));
   int tagMin, tagMax, tagStep, slots, repetitions;
@@ -47,6 +60,7 @@ int main(){
 
   estimators.push_back(&lowerBound);
   estimators.push_back(&eomLee);
+  estimators.push_back(&dsMap);
 
   vector<Simulator> simulators;
 
@@ -59,6 +73,7 @@ int main(){
   export_csv("output/empties.csv", simulators, 1);
   export_csv("output/collisions.csv", simulators, 2);
   export_csv("output/time.csv", simulators, 3);
+  export_flow("output/flow.csv", simulators);
 
   return 0;
 }

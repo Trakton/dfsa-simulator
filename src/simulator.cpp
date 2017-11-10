@@ -14,6 +14,7 @@ class Simulator{
     int it = 0;
     int size = 0;
     vector<vector<int> > results;
+    vector<double> flow;
     vector<int> labels;
   public:
     Simulator(){}
@@ -34,7 +35,10 @@ class Simulator{
         double emptiesMean = 0;
         double slotsMean = 0;
         double timeMean = 0;
+        double flowMean = 0;
         for(int i = 0; i < repetitions; i++){
+          int totalSlots = 0;
+          int sucessSlots = 0; 
           int toIdentify = tags;
           int slots = this->slots;
           timeval start, end;
@@ -64,16 +68,21 @@ class Simulator{
             collisionsMean += collisions;
             emptiesMean += empties;
             slotsMean += slots;
+            totalSlots += slots;
+            sucessSlots += sucess;
             slots = estimator->getNextFrame(collisions, empties, sucess);
           }
           gettimeofday(&end, 0);
           int elapsed = (((end.tv_sec - start.tv_sec)*1000000L+end.tv_usec) - start.tv_usec);
           timeMean += elapsed;
+          flowMean += sucessSlots/(double)totalSlots;
         }
         results[size].push_back(ceil(slotsMean/(double)repetitions));
         results[size].push_back(ceil(emptiesMean/(double)repetitions));
         results[size].push_back(ceil(collisionsMean/(double)repetitions));
-        results[size++].push_back(ceil(timeMean/(double)repetitions));
+        results[size].push_back(ceil(timeMean/(double)repetitions));
+        flow.push_back(flowMean/(double)repetitions);
+        size++;
       }
     }
     int getSize(){
@@ -84,5 +93,8 @@ class Simulator{
     }
     vector<int> getLabel(){
       return labels;
+    }
+    vector<double> getFlow(){
+      return flow;
     }
 };
