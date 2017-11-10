@@ -1,5 +1,3 @@
-#include "estimator.cpp"
-
 class DsMap : public Estimator {
   private:
     int getSubFrameSize(int frames) {

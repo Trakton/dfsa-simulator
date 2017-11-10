@@ -47,7 +47,6 @@ int main(){
 
   estimators.push_back(&lowerBound);
   estimators.push_back(&eomLee);
-  estimators.push_back(&dsMap);
 
   vector<Simulator> simulators;
 

@@ -1,6 +1,3 @@
-#include <cmath>
-#include "estimator.cpp"
-
 class EomLee : public Estimator {
   public:
     int getNextFrame(int collisions, int empties, int sucess){
